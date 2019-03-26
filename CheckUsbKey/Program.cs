@@ -40,12 +40,12 @@ namespace CheckUsbKey
         static void Main(string[] args)
         {
 
-            int start = 4000;
+            int start = 7000;
             try
             {
                 var buffer = new byte[10 * 1024 * 1024];
                 rand = new Random(start);
-                for (int i = 0; i < 1000; i++)
+                for (int i = 0; i < 10000; i++)
                 {
                     rand.NextBytes(buffer);
 
@@ -53,7 +53,7 @@ namespace CheckUsbKey
                     {
                         var hash = GetMd5Hash(md5Hash, buffer);
                         var path = $@"{Drive}\test_{start + i:D8}";
-                        Console.WriteLine(path);
+                        Console.WriteLine($"{path} {hash}");
                         File.WriteAllBytes(path + ".bin", buffer);
                         File.WriteAllText(path + ".txt", hash);
                     }
